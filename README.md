@@ -18,3 +18,5 @@ To Build:
 `wget http://www.motorlogy.com/apache/tomcat/tomcat-7/v7.0.55/bin/apache-tomcat-7.0.55.tar.gz -O ~/rpmbuild/SOURCES/apache-tomcat-7.0.55.tar.gz`
 
 `rpmbuild -bb ~/rpmbuild/SPECS/tomcat7.spec`
+
+根据centos环境下的tomcat6 做了一点调整，同时增加了/usr/sbin/tomcat7 脚本
