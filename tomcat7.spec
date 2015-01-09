@@ -10,13 +10,13 @@
 # rpmbuild -bb ~/rpmbuild/SPECS/tomcat7.spec
 
 %define __jar_repack %{nil}
-%define tomcat_home /opt/tomcat7
+%define tomcat_home /usr/share/tomcat7
 %define tomcat_group tomcat
 %define tomcat_user tomcat
 
 Summary:    Apache Servlet/JSP Engine, RI for Servlet 2.4/JSP 2.0 API
 Name:       tomcat7
-Version:    7.0.55
+Version:    7.0.57
 BuildArch:  noarch
 Release:    1
 License:    Apache Software License
@@ -26,7 +26,7 @@ Source0:    apache-tomcat-%{version}.tar.gz
 Source1:    %{name}.init
 Source2:    %{name}.sysconfig
 Source3:    %{name}.logrotate
-Requires:   jdk
+#Requires:   jdk
 BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -66,6 +66,9 @@ mv %{buildroot}/%{tomcat_home}/conf %{buildroot}/%{_sysconfdir}/%{name}
 cd %{buildroot}/%{tomcat_home}/
 ln -s %{_sysconfdir}/%{name} conf
 cd -
+# Drop sbin script
+install -d -m 755 %{buildroot}/%{_sbindir}
+install    -m 755 %_sourcedir/%{name}.bin %{buildroot}/%{_sbindir}/%{name}
 
 # Drop init script
 install -d -m 755 %{buildroot}/%{_initrddir}
@@ -92,6 +95,7 @@ getent passwd %{tomcat_user} >/dev/null || /usr/sbin/useradd --comment "Tomcat D
 /var/log/%{name}/
 %defattr(-,root,root)
 %{_initrddir}/%{name}
+%{_sbindir}/%{name}
 %{_sysconfdir}/logrotate.d/%{name}
 %config(noreplace) %{_sysconfdir}/sysconfig/%{name}
 %config(noreplace) %{_sysconfdir}/%{name}/*
