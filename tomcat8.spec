@@ -26,6 +26,7 @@ Source0:    apache-tomcat-%{version}.tar.gz
 Source1:    %{name}.init
 Source2:    %{name}.sysconfig
 Source3:    %{name}.logrotate
+Source4:    %{name}.conf
 #Requires:   jdk
 BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -77,6 +78,9 @@ install    -m 755 %_sourcedir/%{name}.init %{buildroot}/%{_initrddir}/%{name}
 # Drop sysconfig script
 install -d -m 755 %{buildroot}/%{_sysconfdir}/sysconfig/
 install    -m 644 %_sourcedir/%{name}.sysconfig %{buildroot}/%{_sysconfdir}/sysconfig/%{name}
+
+# Drop conf script
+install    -m 644 %_sourcedir/%{name}.conf %{buildroot}/%{_sysconfdir}/%{name}
 
 # Drop logrotate script
 install -d -m 755 %{buildroot}/%{_sysconfdir}/logrotate.d

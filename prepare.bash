@@ -21,6 +21,6 @@ fi
 _here=$( cd $( dirname "$0" ) && /bin/pwd )
 _there=$( cd $( dirname "${_dist}" ) && /bin/pwd )/${_dist##*/}
 
-ln -v -s "${_there}" "${_here}/SOURCES/tomcat."{init,logrotate,sysconfig} "${_topdir}/SOURCES/"
-ln -v -s "${_here}/SPECS/tomcat.spec" "${_topdir}/SPECS/"
+ln -v -s "${_there}" "${_here}/tomcat8."{init,logrotate,sysconfig,bin,conf} "${_topdir}/SOURCES/"
+ln -v -s "${_here}/tomcat8.spec" "${_topdir}/SPECS/"
 
