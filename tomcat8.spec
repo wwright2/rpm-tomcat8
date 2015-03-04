@@ -2,21 +2,21 @@
 #
 # sudo yum -y install rpmdevtools && rpmdev-setuptree
 #
-# wget https://raw.github.com/nmilford/rpm-tomcat7/master/tomcat7.spec -O ~/rpmbuild/SPECS/tomcat7.spec
-# wget https://raw.github.com/nmilford/rpm-tomcat7/master/tomcat7.init -O ~/rpmbuild/SOURCES/tomcat7.init
-# wget https://raw.github.com/nmilford/rpm-tomcat7/master/tomcat7.sysconfig -O ~/rpmbuild/SOURCES/tomcat7.sysconfig
-# wget https://raw.github.com/nmilford/rpm-tomcat7/master/tomcat7.logrotate -O ~/rpmbuild/SOURCES/tomcat7.logrotate
+# wget https://raw.github.com/nmilford/rpm-tomcat8/master/tomcat8.spec -O ~/rpmbuild/SPECS/tomcat8.spec
+# wget https://raw.github.com/nmilford/rpm-tomcat8/master/tomcat8.init -O ~/rpmbuild/SOURCES/tomcat8.init
+# wget https://raw.github.com/nmilford/rpm-tomcat8/master/tomcat8.sysconfig -O ~/rpmbuild/SOURCES/tomcat8.sysconfig
+# wget https://raw.github.com/nmilford/rpm-tomcat8/master/tomcat8.logrotate -O ~/rpmbuild/SOURCES/tomcat8.logrotate
 # wget http://www.motorlogy.com/apache/tomcat/tomcat-7/v7.0.55/bin/apache-tomcat-7.0.55.tar.gz -O ~/rpmbuild/SOURCES/apache-tomcat-7.0.55.tar.gz
-# rpmbuild -bb ~/rpmbuild/SPECS/tomcat7.spec
+# rpmbuild -bb ~/rpmbuild/SPECS/tomcat8.spec
 
 %define __jar_repack %{nil}
-%define tomcat_home /usr/share/tomcat7
+%define tomcat_home /usr/share/tomcat8
 %define tomcat_group tomcat
 %define tomcat_user tomcat
 
-Summary:    Apache Servlet/JSP Engine, RI for Servlet 2.4/JSP 2.0 API
-Name:       tomcat7
-Version:    7.0.57
+Summary:    Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
+Name:       tomcat8
+Version:    8.0.20
 BuildArch:  noarch
 Release:    1
 License:    Apache Software License

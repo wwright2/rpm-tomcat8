@@ -1,11 +1,11 @@
 #!/bin/bash
 #
-# tomcat7      This shell script takes care of starting and stopping Tomcat
+# tomcat8      This shell script takes care of starting and stopping Tomcat
 #
 # chkconfig: - 80 20
 #
 ### BEGIN INIT INFO
-# Provides: tomcat7
+# Provides: tomcat8
 # Required-Start: $network $syslog
 # Required-Stop: $network $syslog
 # Default-Start:
@@ -42,7 +42,7 @@ else
 fi
 
 # Get the tomcat config (use this for environment specific settings)
-TOMCAT_CFG="/etc/tomcat7/tomcat7.conf"
+TOMCAT_CFG="/etc/tomcat8/tomcat8.conf"
 if [ -r "$TOMCAT_CFG" ]; then
 echo 'setup cfg by TOMCAT_CFG'    
 . $TOMCAT_CFG
@@ -57,7 +57,7 @@ fi
 CONNECTOR_PORT="${CONNECTOR_PORT:-8080}"
 
 # Path to the tomcat launch script
-TOMCAT_SCRIPT="/usr/sbin/tomcat7"
+TOMCAT_SCRIPT="/usr/sbin/tomcat8"
 
 # Tomcat program name
 TOMCAT_PROG="${NAME}"
