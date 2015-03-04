@@ -13,6 +13,7 @@
 %define tomcat_home /usr/share/tomcat8
 %define tomcat_group tomcat
 %define tomcat_user tomcat
+%define tomcat_user_home /var/lib/tomcat8
 
 Summary:    Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
 Name:       tomcat8
@@ -54,6 +55,25 @@ on JPP packages.
 install -d -m 755 %{buildroot}/%{tomcat_home}/
 cp -R * %{buildroot}/%{tomcat_home}/
 
+# Remove all webapps. Put webapps in /var/lib and link back.
+rm -rf %{buildroot}/%{tomcat_home}/webapps
+install -d -m 755 %{buildroot}%{tomcat_user_home}/webapps
+cd %{buildroot}/%{tomcat_home}/
+ln -s %{tomcat_user_home}/webapps webapps
+cd -
+
+# Remove *.bat
+rm -f %{buildroot}/%{tomcat_home}/bin/*.bat
+
+# Remove extra logging configs
+sed -i -e '/^3manager/d' -e '/\[\/manager\]/d' \
+    -e '/^4host-manager/d' -e '/\[\/host-manager\]/d' \
+    -e '/^java.util.logging.ConsoleHandler/d' \
+    -e 's/, *java.util.logging.ConsoleHandler//' \
+    -e 's/, *4host-manager.org.apache.juli.AsyncFileHandler//' \
+    -e 's/, *3manager.org.apache.juli.AsyncFileHandler//' \
+    %{buildroot}/%{tomcat_home}/conf/logging.properties
+
 # Put logging in /var/log and link back.
 rm -rf %{buildroot}/%{tomcat_home}/logs
 install -d -m 755 %{buildroot}/var/log/%{name}/
@@ -67,6 +87,15 @@ mv %{buildroot}/%{tomcat_home}/conf %{buildroot}/%{_sysconfdir}/%{name}
 cd %{buildroot}/%{tomcat_home}/
 ln -s %{_sysconfdir}/%{name} conf
 cd -
+
+# Put temp and work to /var/lib and link back.
+mv %{buildroot}/%{tomcat_home}/temp %{buildroot}/%{tomcat_user_home}/
+mv %{buildroot}/%{tomcat_home}/work %{buildroot}/%{tomcat_user_home}/
+cd %{buildroot}/%{tomcat_home}/
+ln -s %{tomcat_user_home}/temp
+ln -s %{tomcat_user_home}/work
+cd -
+
 # Drop sbin script
 install -d -m 755 %{buildroot}/%{_sbindir}
 install    -m 755 %_sourcedir/%{name}.bin %{buildroot}/%{_sbindir}/%{name}
@@ -95,9 +124,10 @@ getent passwd %{tomcat_user} >/dev/null || /usr/sbin/useradd --comment "Tomcat D
 
 %files
 %defattr(-,%{tomcat_user},%{tomcat_group})
-%{tomcat_home}/*
+%{tomcat_user_home}
 /var/log/%{name}/
 %defattr(-,root,root)
+%{tomcat_home}
 %{_initrddir}/%{name}
 %{_sbindir}/%{name}
 %{_sysconfdir}/logrotate.d/%{name}
