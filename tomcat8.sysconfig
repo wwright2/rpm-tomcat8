@@ -28,8 +28,6 @@
 #TOMCAT_USER="tomcat"
 #TOMCAT_GROUP="${TOMCAT_GROUP:-`id -gn $TOMCAT_USER`}"
 
-# RUNAS_USER
-#
 # The un-privileged user that runs tomcat.
 # Default is tomcat
 #RUNAS_USER="tomcat"
