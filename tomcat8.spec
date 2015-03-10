@@ -11,8 +11,8 @@
 
 %define __jar_repack %{nil}
 %define tomcat_home /usr/share/tomcat8
-%define tomcat_group tomcat
-%define tomcat_user tomcat
+%define tomcat_group tomcat8
+%define tomcat_user tomcat8
 %define tomcat_user_home /var/lib/tomcat8
 
 Summary:    Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API

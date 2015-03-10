@@ -25,12 +25,12 @@
 #JAVA_OPTS="-Djava.library.path=/usr/lib64"
 
 # What user should run tomcat
-#TOMCAT_USER="tomcat"
+#TOMCAT_USER="tomcat8"
 #TOMCAT_GROUP="${TOMCAT_GROUP:-`id -gn $TOMCAT_USER`}"
 
 # The un-privileged user that runs tomcat.
-# Default is tomcat
-#RUNAS_USER="tomcat"
+# Default is tomcat8
+#RUNAS_USER="tomcat8"
 
 # You can change your tomcat locale here
 #LANG="en_US"
