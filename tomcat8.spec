@@ -14,12 +14,13 @@
 %define tomcat_group tomcat8
 %define tomcat_user tomcat8
 %define tomcat_user_home /var/lib/tomcat8
+%define tomcat_cache_home /var/cache/tomcat8
 
 Summary:    Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
 Name:       tomcat8
 Version:    8.0.21
 BuildArch:  noarch
-Release:    1
+Release:    2
 License:    Apache Software License
 Group:      Networking/Daemons
 URL:        http://tomcat.apache.org/
@@ -88,12 +89,13 @@ cd %{buildroot}/%{tomcat_home}/
 ln -s %{_sysconfdir}/%{name} conf
 cd -
 
-# Put temp and work to /var/lib and link back.
-mv %{buildroot}/%{tomcat_home}/temp %{buildroot}/%{tomcat_user_home}/
-mv %{buildroot}/%{tomcat_home}/work %{buildroot}/%{tomcat_user_home}/
+# Put temp and work to /var/cache and link back.
+install -d -m 755 %{buildroot}%{tomcat_cache_home}
+mv %{buildroot}/%{tomcat_home}/temp %{buildroot}/%{tomcat_cache_home}/
+mv %{buildroot}/%{tomcat_home}/work %{buildroot}/%{tomcat_cache_home}/
 cd %{buildroot}/%{tomcat_home}/
-ln -s %{tomcat_user_home}/temp
-ln -s %{tomcat_user_home}/work
+ln -s %{tomcat_cache_home}/temp
+ln -s %{tomcat_cache_home}/work
 cd -
 
 # Drop sbin script
@@ -120,13 +122,18 @@ rm -rf %{buildroot}
 
 %pre
 getent group %{tomcat_group} >/dev/null || groupadd -r %{tomcat_group}
-getent passwd %{tomcat_user} >/dev/null || /usr/sbin/useradd --comment "Tomcat Daemon User" --shell /bin/bash -M -r -g %{tomcat_group} --home %{tomcat_home} %{tomcat_user}
+getent passwd %{tomcat_user} >/dev/null || /usr/sbin/useradd --comment "Tomcat 8 Daemon User" --shell /bin/bash -M -r -g %{tomcat_group} --home %{tomcat_home} %{tomcat_user}
 
 %files
+%defattr(-,root,%{tomcat_group})
+%{tomcat_cache_home}
+%{tomcat_cache_home}/temp
+%{tomcat_cache_home}/work
+%{tomcat_user_home}/webapps
 %defattr(-,%{tomcat_user},%{tomcat_group})
-%{tomcat_user_home}
 /var/log/%{name}/
 %defattr(-,root,root)
+%{tomcat_user_home}
 %{tomcat_home}
 %{_initrddir}/%{name}
 %{_sbindir}/%{name}
