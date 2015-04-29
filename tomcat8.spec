@@ -20,7 +20,7 @@ Summary:    Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
 Name:       tomcat8
 Version:    8.0.21
 BuildArch:  noarch
-Release:    2
+Release:    3
 License:    Apache Software License
 Group:      Networking/Daemons
 URL:        http://tomcat.apache.org/
@@ -58,7 +58,7 @@ cp -R * %{buildroot}/%{tomcat_home}/
 
 # Remove all webapps. Put webapps in /var/lib and link back.
 rm -rf %{buildroot}/%{tomcat_home}/webapps
-install -d -m 755 %{buildroot}%{tomcat_user_home}/webapps
+install -d -m 775 %{buildroot}%{tomcat_user_home}/webapps
 cd %{buildroot}/%{tomcat_home}/
 ln -s %{tomcat_user_home}/webapps webapps
 cd -
@@ -90,12 +90,14 @@ ln -s %{_sysconfdir}/%{name} conf
 cd -
 
 # Put temp and work to /var/cache and link back.
-install -d -m 755 %{buildroot}%{tomcat_cache_home}
+install -d -m 775 %{buildroot}%{tomcat_cache_home}
 mv %{buildroot}/%{tomcat_home}/temp %{buildroot}/%{tomcat_cache_home}/
 mv %{buildroot}/%{tomcat_home}/work %{buildroot}/%{tomcat_cache_home}/
 cd %{buildroot}/%{tomcat_home}/
 ln -s %{tomcat_cache_home}/temp
 ln -s %{tomcat_cache_home}/work
+chmod 775 %{buildroot}/%{tomcat_cache_home}/temp
+chmod 775 %{buildroot}/%{tomcat_cache_home}/work
 cd -
 
 # Drop sbin script
