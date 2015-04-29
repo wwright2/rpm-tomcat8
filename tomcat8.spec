@@ -20,7 +20,7 @@ Summary:    Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
 Name:       tomcat8
 Version:    8.0.21
 BuildArch:  noarch
-Release:    3
+Release:    4
 License:    Apache Software License
 Group:      Networking/Daemons
 URL:        http://tomcat.apache.org/
@@ -61,6 +61,7 @@ rm -rf %{buildroot}/%{tomcat_home}/webapps
 install -d -m 775 %{buildroot}%{tomcat_user_home}/webapps
 cd %{buildroot}/%{tomcat_home}/
 ln -s %{tomcat_user_home}/webapps webapps
+chmod 775 %{buildroot}/%{tomcat_user_home}
 cd -
 
 # Remove *.bat
@@ -127,11 +128,6 @@ getent group %{tomcat_group} >/dev/null || groupadd -r %{tomcat_group}
 getent passwd %{tomcat_user} >/dev/null || /usr/sbin/useradd --comment "Tomcat 8 Daemon User" --shell /bin/bash -M -r -g %{tomcat_group} --home %{tomcat_home} %{tomcat_user}
 
 %files
-%defattr(-,root,%{tomcat_group})
-%{tomcat_cache_home}
-%{tomcat_cache_home}/temp
-%{tomcat_cache_home}/work
-%{tomcat_user_home}/webapps
 %defattr(-,%{tomcat_user},%{tomcat_group})
 /var/log/%{name}/
 %defattr(-,root,root)
@@ -140,6 +136,11 @@ getent passwd %{tomcat_user} >/dev/null || /usr/sbin/useradd --comment "Tomcat 8
 %{_initrddir}/%{name}
 %{_sbindir}/%{name}
 %{_sysconfdir}/logrotate.d/%{name}
+%defattr(-,root,%{tomcat_group})
+%{tomcat_cache_home}
+%{tomcat_cache_home}/temp
+%{tomcat_cache_home}/work
+%{tomcat_user_home}/webapps
 %config(noreplace) %{_sysconfdir}/sysconfig/%{name}
 %config(noreplace) %{_sysconfdir}/%{name}/*
 
