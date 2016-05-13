@@ -132,9 +132,10 @@ getent passwd %{tomcat_user} >/dev/null || /usr/sbin/useradd --comment "Tomcat 8
 %files
 %defattr(-,%{tomcat_user},%{tomcat_group})
 /var/log/%{name}/
-%defattr(-,root,root)
+%defattr(-,tomcat8,tomcat8)
 %{tomcat_user_home}
 %{tomcat_home}
+%defattr(-,root,root)
 %{_initrddir}/%{name}
 %{_sbindir}/%{name}
 %{_sysconfdir}/logrotate.d/%{name}
