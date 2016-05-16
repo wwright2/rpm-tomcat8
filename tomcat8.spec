@@ -30,7 +30,7 @@ Source2:    %{name}.sysconfig
 Source3:    %{name}.logrotate
 Source4:    %{name}.conf
 #Requires:   jdk
-Requires:   /usr/bin/java
+Requires:   java
 Requires:   redhat-lsb-core
 BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -145,6 +145,7 @@ getent passwd %{tomcat_user} >/dev/null || /usr/sbin/useradd --comment "Tomcat 8
 %{tomcat_cache_home}/work
 %{tomcat_user_home}/webapps
 %config(noreplace) %{_sysconfdir}/sysconfig/%{name}
+%defattr(-,tomcat8,tomcat8)
 %config(noreplace) %{_sysconfdir}/%{name}/*
 
 %post
