@@ -14,6 +14,15 @@ mkdir rpmbuild/SRPMS
 
 wget http://archive.apache.org/dist/tomcat/tomcat-8/v$VERSION/bin/apache-tomcat-$VERSION.tar.gz -O apache-tomcat-$VERSION.tar.gz
 
+##########################
+# Add custom tomfoolery
+# POC- Nick
+##########################
+tar -xzpf apache-tomcat-$VERSION.tar.gz
+cp marlin/marlin*.jar apache-tomcat-$VERSION/lib
+mv apache-tomcat-$VERSION.tar.gz apache-tomcat-$VERSION.tar.gz.old
+tar -czpf apache-tomcat-$VERSION.tar.gz apache-tomcat-$VERSION
+
 ln -v -s "$(pwd)/apache-tomcat-$VERSION.tar.gz" "rpmbuild/SOURCES/"
 ln -v -s "$(pwd)/tomcat8."{init,logrotate,sysconfig,bin,conf} "rpmbuild/SOURCES/"
 ln -v -s "$(pwd)/tomcat8.spec" "rpmbuild/SPECS/"
