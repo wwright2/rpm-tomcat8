@@ -31,5 +31,5 @@ cd rpmbuild
 
 rpmbuild --buildroot "`pwd`/BUILDROOT" ../tomcat8.spec -bb --define "_topdir `pwd`"
 
-publish-rpm $VERSION $RELEASE $ARCH tomcat8 "RPMS/$ARCH/tomcat8-$VERSION-$RELEASE.$ARCH.rpm"
+#publish-rpm $VERSION $RELEASE $ARCH suite-tomcat8 "RPMS/$ARCH/tomcat8-$VERSION-$RELEASE.$ARCH.rpm"
 
