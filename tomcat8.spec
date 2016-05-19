@@ -16,9 +16,9 @@
 %define tomcat_user_home /var/lib/tomcat8
 %define tomcat_cache_home /var/cache/tomcat8
 
-Summary:    Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
-Name:       tomcat8
-Version:    8.0.33
+Summary:    Suite Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
+Name:       suite-tomcat8
+Version:    8.0.35
 BuildArch:  noarch
 Release:    1
 License:    Apache Software License
@@ -47,7 +47,7 @@ We invite you to participate in this open development project. To
 learn more about getting involved, click here.
 
 This package contains the base tomcat installation that depends on Sun's JDK and not
-on JPP packages.
+on JPP packages. This package has been modified for Boundless Suite.
 
 %prep
 %setup -q -n apache-tomcat-%{version}
@@ -150,6 +150,7 @@ getent passwd %{tomcat_user} >/dev/null || /usr/sbin/useradd --comment "Tomcat 8
 
 %post
 chkconfig --add %{name}
+chown tomcat8:tomcat8 /etc/tomcat8
 
 %preun
 if [ $1 = 0 ]; then
