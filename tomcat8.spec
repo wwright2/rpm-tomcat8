@@ -126,7 +126,7 @@ install    -m 644 %_sourcedir/tomcat8.logrotate %{buildroot}/%{_sysconfdir}/logr
 rm -rf %{buildroot}
 
 %pre
-if [ ! -f /sbin/chkconfig ] || [ ! -f /usr/sbin/update-rc.d ]; then
+if [ ! -f /sbin/chkconfig ] && [ ! -f /usr/sbin/update-rc.d ]; then
   echo "Service handler not found, abort"
   exit 1
 fi
