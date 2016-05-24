@@ -126,6 +126,10 @@ install    -m 644 %_sourcedir/tomcat8.logrotate %{buildroot}/%{_sysconfdir}/logr
 rm -rf %{buildroot}
 
 %pre
+if [ ! -f /sbin/chkconfig ] || [ ! -f /usr/sbin/update-rc.d ]; then
+  echo "Service handler not found, abort"
+  exit 1
+fi
 getent group %{tomcat_group} >/dev/null || groupadd -r %{tomcat_group}
 getent passwd %{tomcat_user} >/dev/null || /usr/sbin/useradd --comment "Tomcat 8 Daemon User" --shell /bin/bash -M -r -g %{tomcat_group} --home %{tomcat_home} %{tomcat_user}
 
@@ -149,13 +153,21 @@ getent passwd %{tomcat_user} >/dev/null || /usr/sbin/useradd --comment "Tomcat 8
 %config(noreplace) %{_sysconfdir}/tomcat8/*
 
 %post
-chkconfig --add tomcat8
-chown tomcat8:tomcat8 /etc/tomcat8
+if [ -f /sbin/chkconfig ]; then
+  chkconfig --add tomcat8
+elif [ -f /usr/sbin/update-rc.d ]; then
+  update-rc.d tomcat8 defaults
+fi
+chown -R tomcat8:tomcat8 /etc/tomcat8
 
 %preun
 if [ $1 = 0 ]; then
   service tomcat8 stop > /dev/null 2>&1
-  chkconfig --del tomcat8
+  if [ -f /sbin/chkconfig ]; then
+    chkconfig --del tomcat8
+  elif [ -f /usr/sbin/update-rc.d ]; then
+    update-rc.d -f tomcat8 remove
+  fi
 fi
 
 %postun
