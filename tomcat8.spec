@@ -156,6 +156,7 @@ getent passwd %{tomcat_user} >/dev/null || /usr/sbin/useradd --comment "Tomcat 8
 if [ -f /sbin/chkconfig ]; then
   chkconfig --add tomcat8
 elif [ -f /usr/sbin/update-rc.d ]; then
+  ln -s /etc/rc.d/init.d/tomcat8 /etc/init.d/tomcat8
   update-rc.d tomcat8 defaults
 fi
 chown -R tomcat8:tomcat8 /etc/tomcat8
@@ -167,13 +168,12 @@ if [ $1 = 0 ]; then
     chkconfig --del tomcat8
   elif [ -f /usr/sbin/update-rc.d ]; then
     update-rc.d -f tomcat8 remove
+    unlink /etc/init.d/tomcat8
   fi
 fi
 
 %postun
-if [ $1 -ge 1 ]; then
-  service tomcat8 condrestart >/dev/null 2>&1
-fi
+#service tomcat8 restart >/dev/null 2>&1
 
 %changelog
 * Thu Sep 4 2014 Edward Bartholomew <edward@bartholomew>
