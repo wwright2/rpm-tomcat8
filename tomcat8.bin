@@ -2,9 +2,9 @@
 
 if [ -r /usr/share/java-utils/java-functions ]; then
   . /usr/share/java-utils/java-functions
-else
-  echo "Can't read Java functions library, aborting"
-  exit 1
+#else
+#  echo "Can't read Java functions library, aborting"
+#  exit 1
 fi
 
 # Get the tomcat config (use this for environment specific settings)
@@ -21,7 +21,8 @@ if [ -r "/etc/sysconfig/${NAME}" ]; then
     . /etc/sysconfig/${NAME}
 fi
 
-set_javacmd
+#set_javacmd
+JAVACMD=/usr/bin/java
 
 # CLASSPATH munging
 if [ -n "$JSSE_HOME" ]; then
