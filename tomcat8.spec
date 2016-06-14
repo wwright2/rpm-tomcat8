@@ -20,7 +20,7 @@ Summary:    Suite Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
 Name:       suite-tomcat8
 Version:    8.0.35
 BuildArch:  noarch
-Release:    3
+Release:    5
 License:    Apache Software License
 Group:      Networking/Daemons
 URL:        http://tomcat.apache.org/
@@ -126,6 +126,7 @@ install    -m 644 %_sourcedir/tomcat8.logrotate %{buildroot}/%{_sysconfdir}/logr
 rm -rf %{buildroot}
 
 %pre
+mkdir -p /var/lock/subsys/
 if [ ! -f /sbin/chkconfig ] && [ ! -f /usr/sbin/update-rc.d ]; then
   echo "Service handler not found, abort"
   exit 1
