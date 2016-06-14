@@ -157,8 +157,10 @@ getent passwd %{tomcat_user} >/dev/null || /usr/sbin/useradd --comment "Tomcat 8
 if [ -f /sbin/chkconfig ]; then
   chkconfig --add tomcat8
 elif [ -f /usr/sbin/update-rc.d ]; then
-  ln -s /etc/rc.d/init.d/tomcat8 /etc/init.d/tomcat8
-  update-rc.d tomcat8 defaults
+  if [ -f /etc/init.d/tomcat8 ]; then
+    ln -s /etc/rc.d/init.d/tomcat8 /etc/init.d/tomcat8
+  fi
+#  update-rc.d tomcat8 defaults
 fi
 chown -R tomcat8:tomcat8 /etc/tomcat8
 
