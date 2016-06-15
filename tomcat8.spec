@@ -20,7 +20,7 @@ Summary:    Suite Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
 Name:       suite-tomcat8
 Version:    8.0.35
 BuildArch:  noarch
-Release:    6
+Release:    7
 License:    Apache Software License
 Group:      Networking/Daemons
 URL:        http://tomcat.apache.org/
@@ -157,7 +157,7 @@ getent passwd %{tomcat_user} >/dev/null || /usr/sbin/useradd --comment "Tomcat 8
 if [ -f /sbin/chkconfig ]; then
   chkconfig --add tomcat8
 elif [ -f /usr/sbin/update-rc.d ]; then
-  if [ -f /etc/init.d/tomcat8 ]; then
+  if [ ! -f /etc/init.d/tomcat8 ]; then
     ln -s /etc/rc.d/init.d/tomcat8 /etc/init.d/tomcat8
   fi
 #  update-rc.d tomcat8 defaults
