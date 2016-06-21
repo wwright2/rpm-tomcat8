@@ -20,6 +20,7 @@ wget http://archive.apache.org/dist/tomcat/tomcat-8/v$VERSION/bin/apache-tomcat-
 ##########################
 tar -xzpf apache-tomcat-$VERSION.tar.gz
 cp marlin/marlin*.jar apache-tomcat-$VERSION/lib
+cp java-libs apache-tomcat-$VERSION/conf
 mv apache-tomcat-$VERSION.tar.gz apache-tomcat-$VERSION.tar.gz.old
 tar -czpf apache-tomcat-$VERSION.tar.gz apache-tomcat-$VERSION
 

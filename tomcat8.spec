@@ -119,9 +119,6 @@ install    -m 644 %_sourcedir/tomcat8.sysconfig %{buildroot}/%{_sysconfdir}/sysc
 # Drop conf script
 install    -m 644 %_sourcedir/tomcat8.conf %{buildroot}/%{_sysconfdir}/tomcat8
 
-# Drop in java-libs file
-install    -m 644 %_sourcedir/java-libs %{buildroot}/%{_sysconfdir}/tomcat8
-
 # Drop logrotate script
 install -d -m 755 %{buildroot}/%{_sysconfdir}/logrotate.d
 install    -m 644 %_sourcedir/tomcat8.logrotate %{buildroot}/%{_sysconfdir}/logrotate.d/tomcat8
