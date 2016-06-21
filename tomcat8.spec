@@ -20,7 +20,7 @@ Summary:    Suite Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
 Name:       suite-tomcat8
 Version:    8.0.35
 BuildArch:  noarch
-Release:    8
+Release:    9
 License:    Apache Software License
 Group:      Networking/Daemons
 URL:        http://tomcat.apache.org/
@@ -88,6 +88,7 @@ cd -
 # Put conf in /etc/ and link back.
 install -d -m 755 %{buildroot}/%{_sysconfdir}
 mv %{buildroot}/%{tomcat_home}/conf %{buildroot}/%{_sysconfdir}/tomcat8
+mkdir %{buildroot}/%{_sysconfdir}/tomcat8/suite-opts
 cd %{buildroot}/%{tomcat_home}/
 ln -s %{_sysconfdir}/tomcat8 conf
 cd -
@@ -117,6 +118,9 @@ install    -m 644 %_sourcedir/tomcat8.sysconfig %{buildroot}/%{_sysconfdir}/sysc
 
 # Drop conf script
 install    -m 644 %_sourcedir/tomcat8.conf %{buildroot}/%{_sysconfdir}/tomcat8
+
+# Drop in java-libs file
+install    -m 644 %_sourcedir/java-libs %{buildroot}/%{_sysconfdir}/tomcat8
 
 # Drop logrotate script
 install -d -m 755 %{buildroot}/%{_sysconfdir}/logrotate.d
