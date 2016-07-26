@@ -20,7 +20,7 @@ Summary:    Suite Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
 Name:       suite-tomcat8
 Version:    8.0.35
 BuildArch:  noarch
-Release:    16
+Release:    18
 License:    Apache Software License
 Group:      Networking/Daemons
 URL:        http://tomcat.apache.org/
@@ -30,7 +30,7 @@ Source2:    tomcat8.sysconfig
 Source3:    tomcat8.logrotate
 Source4:    tomcat8.conf
 #Requires:   jdk
-Requires:   java
+Requires:   java, java-1.8.0-openjdk
 Requires:   redhat-lsb-core
 Conflicts:  tomcat, tomcat8
 BuildRoot:  %{_tmppath}/tomcat8-%{version}-%{release}-root-%(%{__id_u} -n)
