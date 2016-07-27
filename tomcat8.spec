@@ -181,7 +181,3 @@ fi
 #service tomcat8 restart >/dev/null 2>&1
 
 %changelog
-* Thu Sep 4 2014 Edward Bartholomew <edward@bartholomew>
-- 7.0.55
-* Mon Jul 1 2013 Nathan Milford <nathan@milford.io>
-- 7.0.41
