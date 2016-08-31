@@ -105,6 +105,7 @@ function start() {
      log_failure_msg
      return
    fi
+   mkdir -p /var/lock/subsys/
    if [ -f "/var/lock/subsys/${NAME}" ]; then
         if [ -f "${CATALINA_PID}" ]; then
             read kpid < ${CATALINA_PID}
