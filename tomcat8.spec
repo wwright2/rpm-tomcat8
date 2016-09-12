@@ -32,7 +32,7 @@ Source4:    tomcat8.conf
 #Requires:   jdk
 Requires:   java-1.8.0
 Requires:   redhat-lsb-core
-Conflicts:  tomcat, tomcat8, opengeo-tomcat
+Conflicts:  tomcat, tomcat7, tomcat8, opengeo-tomcat
 BuildRoot:  %{_tmppath}/tomcat8-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
