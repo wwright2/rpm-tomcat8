@@ -18,9 +18,9 @@
 
 Summary:    Suite Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
 Name:       suite-tomcat8
-Version:    8.0.35
+Version:    8.0.42
 BuildArch:  noarch
-Release:    26
+Release:    1
 License:    Apache Software License
 Group:      Networking/Daemons
 URL:        http://tomcat.apache.org/
