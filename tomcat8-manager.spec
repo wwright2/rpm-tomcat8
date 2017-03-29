@@ -13,6 +13,7 @@ Release:    1
 License:    Apache Software License
 Group:      Networking/Daemons
 URL:        http://tomcat.apache.org/
+Source0:    apache-tomcat-%{version}.tar.gz
 Requires:   suite-tomcat8
 BuildRoot:  %{_tmppath}/tomcat8-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -31,18 +32,14 @@ learn more about getting involved, click here.
 This package contains the tomcat manager webapp.
 
 %prep
+%setup -q -n apache-tomcat-%{version}
 
 %build
 
 %install
-# Create webapp
-cd %{buildroot}/webapps/manager
-jar -cvf manager.war *
-cd -
-
 # Add webapp
 install -d -m 775 %{buildroot}%{tomcat_user_home}/webapps
-mv %{buildroot}/webapps/manager/manager.war %{buildroot}%{tomcat_user_home}/webapps
+mv webapps/manager/manager.war %{buildroot}%{tomcat_user_home}/webapps
 chmod 775 %{buildroot}/%{tomcat_user_home}/webapps/*
 
 %clean
