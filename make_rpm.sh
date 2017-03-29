@@ -28,13 +28,9 @@ ln -v -s "$(pwd)/apache-tomcat-$VERSION.tar.gz" "rpmbuild/SOURCES/"
 ln -v -s "$(pwd)/tomcat8."{init,logrotate,sysconfig,bin,conf} "rpmbuild/SOURCES/"
 ln -v -s "$(pwd)/tomcat8.spec" "rpmbuild/SPECS/"
 
-cd apache-tomcat-$VERSION/webapps/manager
-jar -cvf manager.war *
-
-
-
 cd ../../../rpmbuild
 
 rpmbuild --buildroot "`pwd`/BUILDROOT" ../tomcat8.spec -bb --define "_topdir `pwd`"
+rpmbuild --buildroot "`pwd`/BUILDROOT" ../tomcat8-manager.spec -bb --define "_topdir `pwd`"
 
 #publish-rpm $VERSION $RELEASE $ARCH suite-tomcat8 "RPMS/$ARCH/tomcat8-$VERSION-$RELEASE.$ARCH.rpm"
