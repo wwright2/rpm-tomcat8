@@ -50,7 +50,7 @@ service tomcat8 stop > /dev/null 2>&1
 
 %files
 %defattr(-,%{tomcat_user},%{tomcat_group})
-%{tomcat_user_home}/webapps
+%{tomcat_user_home}/webapps/*
 
 %post
 
