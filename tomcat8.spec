@@ -16,11 +16,11 @@
 %define tomcat_user_home /var/lib/tomcat8
 %define tomcat_cache_home /var/cache/tomcat8
 
-Summary:    Suite Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
-Name:       suite-tomcat8
-Version:    8.0.42
+Summary:    Boundless Server Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
+Name:       boundless-server-tomcat8
+Version:    8.0.47
 BuildArch:  noarch
-Release:    2
+Release:    3
 License:    Apache Software License
 Group:      Networking/Daemons
 URL:        http://tomcat.apache.org/
@@ -32,7 +32,8 @@ Source4:    tomcat8.conf
 #Requires:   jdk
 Requires:   java-1.8.0
 Requires:   redhat-lsb-core
-Conflicts:  tomcat, tomcat7, tomcat8, opengeo-tomcat
+Obsoletes:  suite-tomcat8
+Conflicts:  tomcat, tomcat7, tomcat8, opengeo-tomcat, suite-tomcat8
 BuildRoot:  %{_tmppath}/tomcat8-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -48,7 +49,7 @@ We invite you to participate in this open development project. To
 learn more about getting involved, click here.
 
 This package contains the base tomcat installation that depends on Sun's JDK and not
-on JPP packages. This package has been modified for Boundless Suite.
+on JPP packages. This package has been modified for Boundless Server.
 
 %prep
 %setup -q -n apache-tomcat-%{version}
@@ -89,7 +90,7 @@ cd -
 # Put conf in /etc/ and link back.
 install -d -m 755 %{buildroot}/%{_sysconfdir}
 mv %{buildroot}/%{tomcat_home}/conf %{buildroot}/%{_sysconfdir}/tomcat8
-mkdir %{buildroot}/%{_sysconfdir}/tomcat8/suite-opts
+mkdir %{buildroot}/%{_sysconfdir}/tomcat8/server-opts
 cd %{buildroot}/%{tomcat_home}/
 ln -s %{_sysconfdir}/tomcat8 conf
 cd -

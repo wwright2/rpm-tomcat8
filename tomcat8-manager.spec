@@ -5,16 +5,18 @@
 %define tomcat_user_home /var/lib/tomcat8
 %define tomcat_cache_home /var/cache/tomcat8
 
-Summary:    Suite Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
-Name:       suite-tomcat8-manager
-Version:    8.0.42
+Summary:    Boundless Server Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
+Name:       boundless-server-tomcat8-manager
+Version:    8.0.47
 BuildArch:  noarch
-Release:    2
+Release:    3
 License:    Apache Software License
 Group:      Networking/Daemons
 URL:        http://tomcat.apache.org/
 Source0:    apache-tomcat-%{version}.tar.gz
-Requires:   suite-tomcat8
+Requires:   boundless-server-tomcat8
+Obsoletes: suite-tomcat8-manager
+Conflicts: suite-tomcat8-manager
 BuildRoot:  %{_tmppath}/tomcat8-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
