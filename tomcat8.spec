@@ -20,7 +20,7 @@ Summary:    Boundless Server Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2
 Name:       boundless-server-tomcat8
 Version:    8.0.47
 BuildArch:  noarch
-Release:    3
+Release:    4
 License:    Apache Software License
 Group:      Networking/Daemons
 URL:        http://tomcat.apache.org/
@@ -30,7 +30,7 @@ Source2:    tomcat8.sysconfig
 Source3:    tomcat8.logrotate
 Source4:    tomcat8.conf
 #Requires:   jdk
-Requires:   java-1.8.0
+Requires:   java-1.8.0-headless
 Requires:   redhat-lsb-core
 Obsoletes:  suite-tomcat8
 Conflicts:  tomcat, tomcat7, tomcat8, opengeo-tomcat, suite-tomcat8
