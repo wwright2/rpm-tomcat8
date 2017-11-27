@@ -9,7 +9,7 @@ Summary:    Boundless Server Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2
 Name:       boundless-server-tomcat8-manager
 Version:    8.0.47
 BuildArch:  noarch
-Release:    3
+Release:    4
 License:    Apache Software License
 Group:      Networking/Daemons
 URL:        http://tomcat.apache.org/
@@ -48,7 +48,9 @@ chmod 775 %{buildroot}/%{tomcat_user_home}/webapps/*
 rm -rf %{buildroot}
 
 %pre
-service tomcat8 stop > /dev/null 2>&1
+if [ -f /etc/init.d/tomcat8 ]; then
+  /etc/init.d/tomcat8 stop > /dev/null 2>&1
+fi
 
 %files
 %defattr(-,%{tomcat_user},%{tomcat_group})
