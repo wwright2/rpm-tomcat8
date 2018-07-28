@@ -33,6 +33,8 @@ ln -v -s "$(pwd)/tomcat8.spec" "rpmbuild/SPECS/"
 
 cd rpmbuild
 
+hostname build.boundlessgeo.com
+
 rpmbuild --buildroot "`pwd`/BUILDROOT" ../tomcat8.spec -bb --define "_topdir `pwd`"
 rpmbuild --buildroot "`pwd`/BUILDROOT" ../tomcat8-manager.spec -bb --define "_topdir `pwd`"
 
