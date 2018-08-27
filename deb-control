@@ -1,11 +1,11 @@
 Source: suite-tomcat8
 Section: alien
 Priority: extra
-Maintainer: root <root@priv-repo.boundlessgeo.com>
+Maintainer: root <root@build.boundlessgeo.com>
 
 Package: suite-tomcat8
 Architecture: all
-Depends: ${shlibs:Depends}, java8-runtime-headless
+Depends: ${shlibs:Depends}, java8-runtime-headless, sysv-rc-conf
 Conflicts: tomcat, tomcat7, tomcat8, opengeo-tomcat7, oracle-java9-installer, suite-tomcat8, openjdk-9-jre-headless
 Replaces: suite-tomcat8
 Description: Suite Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
