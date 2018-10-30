@@ -16,9 +16,9 @@
 %define tomcat_user_home /var/lib/tomcat8
 %define tomcat_cache_home /var/cache/tomcat8
 
-Summary:    Boundless Server Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
-Name:       boundless-server-tomcat8
-Version:    8.5.33
+Summary:    Nice Systems Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
+Name:       nice systems tomcat8
+Version:    8.5.34
 BuildArch:  noarch
 Release:    2
 License:    Apache Software License
@@ -30,7 +30,8 @@ Source2:    tomcat8.sysconfig
 Source3:    tomcat8.logrotate
 Source4:    tomcat8.conf
 #Requires:   jdk
-Requires:   java-1.8.0-headless
+#Requires:   java-1.8.0-openjdk-headless
+Requires:   jdk >= 1.7
 Requires:   redhat-lsb-core
 Obsoletes:  suite-tomcat8
 Conflicts:  tomcat, tomcat7, tomcat8, opengeo-tomcat, suite-tomcat8
@@ -49,7 +50,7 @@ We invite you to participate in this open development project. To
 learn more about getting involved, click here.
 
 This package contains the base tomcat installation that depends on Sun's JDK and not
-on JPP packages. This package has been modified for Boundless Server.
+on JPP packages. This package has been modified for NiceSystems Server.
 
 %prep
 %setup -q -n apache-tomcat-%{version}
