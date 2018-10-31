@@ -3,6 +3,11 @@
 
 An RPM spec file to install Tomcat 8.x.x
 
+```
+https://tomcat.apache.org/security-8.html#Apache_Tomcat_8.x_vulnerabilities
+http://archive.apache.org/dist/tomcat/tomcat-8/
+```
+
 
 Tools for rpm build :
 
