@@ -10,7 +10,7 @@ URL="http://archive.apache.org/dist/tomcat"
 # GET a listing of 8.x.x tomcat packages.
 [ ! -f "tomcat-$MAJORVERSION.list" ] &&  curl $URL/tomcat-$MAJORVERSION/ > tomcat-$MAJORVERSION.list
 
-LATEST=$(egrep -o "[0-9]{1,2}[.][0-9]{1,3}[.][0-9]{1,3}*" tcat.versions.t | sort -u | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | tail -n1 )
+LATEST=$(egrep -o "[0-9]{1,2}[.][0-9]{1,3}[.][0-9]{1,3}*" tomcat-$MAJORVERSION.list | sort -u | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | tail -n1 )
 RELEASE=$( cat release.txt )
 
 [ -z "$LATEST" ] && echo "Error LATEST is null exiting" &&  exit 2
@@ -32,6 +32,7 @@ mkdir rpmbuild/SOURCES
 mkdir rpmbuild/SPECS
 mkdir rpmbuild/SRPMS
 
+# Dont download if it already exists.
 [ ! -f "apache-tomcat-$VERSION.tar.gz" ] && `wget http://archive.apache.org/dist/tomcat/tomcat-$MAJORVERSION/v$VERSION/bin/apache-tomcat-$VERSION.tar.gz -O apache-tomcat-$VERSION.tar.gz`
 
 
@@ -49,7 +50,6 @@ mkdir rpmbuild/SRPMS
 #ww-end
 
 
- 
 ln -v -s "$(pwd)/apache-tomcat-$VERSION.tar.gz" "rpmbuild/SOURCES/"
 ln -v -s "$(pwd)/tomcat8."{init,logrotate,sysconfig,bin,conf} "rpmbuild/SOURCES/"
 ln -v -s "$(pwd)/tomcat8.spec" "rpmbuild/SPECS/"
