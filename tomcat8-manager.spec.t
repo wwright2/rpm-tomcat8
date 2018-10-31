@@ -1,12 +1,12 @@
 %define __jar_repack %{nil}
-%define tomcat_home /usr/share/tomcat8
+%define tomcat_home /opt/tomcat8
 %define tomcat_group tomcat8
 %define tomcat_user tomcat8
 %define tomcat_user_home /var/lib/tomcat8
 %define tomcat_cache_home /var/cache/tomcat8
 
 Summary:    NiceSystems Server Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
-Name:       nicesystems-server-tomcat8-manager
+Name:       nicesystems-tomcat8-manager
 Version:    8.5.33
 BuildArch:  noarch
 Release:    2
@@ -41,8 +41,8 @@ This package contains the tomcat manager webapp.
 %install
 # Add webapp
 install -d -m 775 %{buildroot}%{tomcat_user_home}/webapps
-mv webapps/manager/manager.war %{buildroot}%{tomcat_user_home}/webapps
-chmod 775 %{buildroot}/%{tomcat_user_home}/webapps/*
+#ww mv webapps/manager/manager.war %{buildroot}%{tomcat_user_home}/webapps
+#ww chmod 775 %{buildroot}/%{tomcat_user_home}/webapps/*
 
 %clean
 rm -rf %{buildroot}
@@ -54,7 +54,8 @@ fi
 
 %files
 %defattr(-,%{tomcat_user},%{tomcat_group})
-%{tomcat_user_home}/webapps/*
+#ww %{tomcat_user_home}/webapps/*
+%{tomcat_user_home}/webapps/
 
 %post
 

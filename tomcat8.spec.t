@@ -10,15 +10,15 @@
 # rpmbuild -bb ~/rpmbuild/SPECS/tomcat8.spec
 
 %define __jar_repack %{nil}
-%define tomcat_home /usr/share/tomcat8
+%define tomcat_home /opt/tomcat8
 %define tomcat_group tomcat8
 %define tomcat_user tomcat8
 %define tomcat_user_home /var/lib/tomcat8
 %define tomcat_cache_home /var/cache/tomcat8
 
 Summary:    Nice Systems Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
-Name:       nice systems tomcat8
-Version:    8.5.34
+Name:       nicesystems-tomcat8
+Version:    8.5.33
 BuildArch:  noarch
 Release:    2
 License:    Apache Software License
@@ -31,7 +31,7 @@ Source3:    tomcat8.logrotate
 Source4:    tomcat8.conf
 #Requires:   jdk
 #Requires:   java-1.8.0-openjdk-headless
-Requires:   jdk >= 1.7
+Requires:   java >= 1:1.7.0
 Requires:   redhat-lsb-core
 Obsoletes:  suite-tomcat8
 Conflicts:  tomcat, tomcat7, tomcat8, opengeo-tomcat, suite-tomcat8
@@ -62,10 +62,10 @@ install -d -m 755 %{buildroot}/%{tomcat_home}/
 cp -R * %{buildroot}/%{tomcat_home}/
 
 # Remove all webapps. Put webapps in /var/lib and link back.
-rm -rf %{buildroot}/%{tomcat_home}/webapps
+#rm -rf %{buildroot}/%{tomcat_home}/webapps
 install -d -m 775 %{buildroot}%{tomcat_user_home}/webapps
 cd %{buildroot}/%{tomcat_home}/
-ln -s %{tomcat_user_home}/webapps webapps
+#ln -s %{tomcat_user_home}/webapps webapps
 chmod 775 %{buildroot}/%{tomcat_user_home}
 cd -
 

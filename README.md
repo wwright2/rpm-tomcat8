@@ -1,24 +1,37 @@
-rpm-tomcat8
-===========
 
-An RPM spec file to install Tomcat 8.0.
+# rpm-tomcat8
 
-To Build:
+An RPM spec file to install Tomcat 8.x.x
 
-`sudo yum -y install rpmdevtools`
 
-`rpmdev-setuptree`
+Tools for rpm build :
 
-`wget http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.33/bin/apache-tomcat-8.0.33.tar.gz -O ~/rpmbuild/SOURCES/apache-tomcat-8.0.33.tar.gz`
-
-`./prepare.bash apache-tomcat-8.0.33.tar.gz`
-
-`rpmbuild -bb ~/rpmbuild/SPECS/tomcat8.spec`
+`sudo yum install rpm-build`
 
 To clean the RPM build dir
 
-`rpmdev-wipetree && rm -rf rpmbuild` 
+```
+rm -rf rpmbuild
+```
 
-All in one line to rebuild & install the package:
+edit make_rpm.sh
+- set MAJORVERSION="8"
+- edit URL="http://archive.apache.org/dist/tomcat"
+- test curl $URL/tomcat-$MAJORVERSION/
+	- test in a browser
+	
+SAVE. RUN. ?Look for error messages.
+```
+./make_rpm.sh
+```
 
-`sudo rpm -e tomcat8 && rpmdev-wipetree && rm -rf rpmbuild && rpmdev-setuptree && ./prepare.bash apache-tomcat-8.0.33.tar.gz && rpmbuild -bb rpmbuild/SPECS/tomcat8.spec && sudo yum install -y rpmbuild/RPMS/noarch/tomcat8-8.0.33-1.noarch.rpm`
+
+Example Output: 
+```
+find | grep rpm$
+```
+```
+rpmbuild/RPMS/noarch/nicesystems-tomcat8-8.5.34-2.noarch.rpm
+rpmbuild/RPMS/noarch/nicesystems-tomcat8-manager-8.5.34-2.noarch.rpm
+
+```
