@@ -62,7 +62,11 @@ rpmbuild --buildroot "`pwd`/BUILDROOT" ../tomcat8.spec -bb --define "_topdir `pw
 rpmbuild --buildroot "`pwd`/BUILDROOT" ../tomcat8-manager.spec -bb --define "_topdir `pwd`"
 
 popd
-find rpmbuild | grep rpm$
+
+[ ! -d "archive" ] && mkdir -p archive  
+for i in `find rpmbuild | grep rpm$` ; do 
+    cp $i archive
+done
 
 
 #publish-rpm $VERSION $RELEASE $ARCH suite-tomcat8 "RPMS/$ARCH/tomcat8-$VERSION-$RELEASE.$ARCH.rpm"
