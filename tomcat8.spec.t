@@ -18,9 +18,9 @@
 
 Summary:    Nice Systems Apache Servlet/JSP Engine, RI for Servlet 3.1/JSP 2.3 API
 Name:       nicesystems-tomcat8
-Version:    8.5.33
+Version:    8.5.xx <this line replaced by make_rpm.sh>
 BuildArch:  noarch
-Release:    2
+Release:    2 <this line replaced by make_rpm.sh>
 License:    Apache Software License
 Group:      Networking/Daemons
 URL:        http://tomcat.apache.org/
@@ -62,7 +62,7 @@ install -d -m 755 %{buildroot}/%{tomcat_home}/
 cp -R * %{buildroot}/%{tomcat_home}/
 
 # Remove all webapps. Put webapps in /var/lib and link back.
-#rm -rf %{buildroot}/%{tomcat_home}/webapps
+rm -rf %{buildroot}/%{tomcat_home}/webapps/*
 install -d -m 775 %{buildroot}%{tomcat_user_home}/webapps
 cd %{buildroot}/%{tomcat_home}/
 #ln -s %{tomcat_user_home}/webapps webapps
